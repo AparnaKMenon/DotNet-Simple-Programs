@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -59,16 +60,17 @@ namespace MeetingAssist.Presentation.ViewModel
 
             _meetingManager = new MeetingManager();
 
-            populateMeetingRooms();
-            populateStartTimeList();
-            populateDuration();
-            populateUsers();
-            populateMeetings();
-
             _addAttendeeCommand = new RelayCommand(AddAttendee, CanAddAttendee);
             _addMeetingCommand = new RelayCommand(AddMeeting, CanAddMeeting);
 
             _attendees = new ObservableCollection<User>();
+
+            //Populate All Comboboxes
+            PopulateMeetingRooms();
+            PopulateStartTimeList();
+            PopulateDuration();
+            PopulateUsers();
+            PopulateMeetings();
         }
 
         #endregion
@@ -331,23 +333,31 @@ namespace MeetingAssist.Presentation.ViewModel
 
         #region Private Methods
 
-        private void populateMeetingRooms()
+        private void PopulateMeetingRooms()
         {
             _meetingRooms = new ObservableCollection<MeetingRoom>();
             _meetingRooms = _meetingManager.FetchMeetingRoomList(_startDate, _startTime, _duration);
         }
 
-        private void populateMeetings()
+        private void PopulateMeetings()
         {
             _meetings = new ObservableCollection<Meeting>();
             _meetings = _meetingManager.FetchMeetingsList();
         }
 
-        private void populateStartTimeList()
+        private void PopulateStartTimeList()
         {
-            CurrentDateTime = DateTime.Now.ToString("dd MMM, yyyy");
+            //Time being Displayed on the Top left corner of the Form
+            _currentDateTime = DateTime.Now.ToString("dd MMM, yyyy");
 
+            //Setting the Date Picker control to today's Date
             _startDate = DateTime.Now;
+
+            ////Setting the TimePicker Control to the next half hour so that booking can be done easily
+            //int minute = (_startDate.Minute < 30) ? 30 : 0;
+            //int hours = (minute == 30) ? (_startDate.Hour) : (_startDate.Hour) + 1;
+            //string timeNow = hours.ToString() + " : " + minute.ToString();
+            //int timeSelection = 0;
 
             _startTimeList = new List<string>();
             for (int i = 0; i < 24; i++)
@@ -356,10 +366,18 @@ namespace MeetingAssist.Presentation.ViewModel
                 DateTime dt = Convert.ToDateTime(ts.ToString());
                 _startTimeList.Add(dt.ToString("HH") + " : 00");
                 _startTimeList.Add(dt.ToString("HH") + " : 30");
+
+                //if(hours == dt.Hour)
+                //{
+                //    timeSelection = i * 2;
+                //}
+                //if (30 == minute)
+                //    timeSelection--;
             }
+            //_startTime = DateTime.ParseExact(timeNow, "HH:mm", CultureInfo.InvariantCulture);
         }
 
-        private void populateDuration()
+        private void PopulateDuration()
         {
             _durationList = new List<string>();
             for (int i = 0; i < 10; i++)
@@ -371,7 +389,7 @@ namespace MeetingAssist.Presentation.ViewModel
             }
         }
 
-        private void populateUsers()
+        private void PopulateUsers()
         {
             _users = new ObservableCollection<User>();
             _users = _meetingManager.FetchUserList();
@@ -409,11 +427,7 @@ namespace MeetingAssist.Presentation.ViewModel
                     && (null != _startDate) && (null != _startTime) && (null != _duration))
                 {
                     CalculateMeetingTime();
-                    populateMeetingRooms();
-                    if (null != _meetingRoom)
-                    {
-                        string str = _meetingRoom.Name;
-                    }
+                    PopulateMeetingRooms();
                 }
             }
         }

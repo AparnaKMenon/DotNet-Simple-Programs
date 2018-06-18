@@ -2,13 +2,14 @@
 {
     class MeetingRoom
     {
-        public MeetingRoom(int id, string name)
-        {
-            _id = id;
-            _name = name;
-        }
-
+        #region Private Members
         private int _id;
+        private string _name;
+
+        #endregion
+
+        #region Properties
+
         // Gets or Sets Unique integer ID for the Meeting Room
         public int Id
         {
@@ -16,12 +17,23 @@
             set { _id = value; }
         }
 
-        private string _name;
         // Gets or Sets Name of the Meeting Room
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+
+        #endregion
+
+        #region Constructors
+
+        public MeetingRoom(int id, string name)
+        {
+            _id = id;
+            _name = name;
+        }
+
+        #endregion
     }
 }
