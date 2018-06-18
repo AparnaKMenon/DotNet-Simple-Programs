@@ -170,7 +170,7 @@
 
                 <!--Meeting Agenda-->
                 <Label Name="LblMtngAgenda" Grid.Row="8" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Meeting Agenda" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
-                <TextBox Name="TxtMtngAgenda" Grid.Row="9" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Margin="10,0,10,10" VerticalScrollBarVisibility="Visible" Text="{Binding Path= Agenda }" />
+                <TextBox Name="TxtMtngAgenda" Grid.Row="9" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Margin="10,0,10,10" VerticalScrollBarVisibility="Visible" FontSize="12" Text="{Binding Path= Agenda }" />
 
                 <!-- Book Now Button -->
                 <Button Name="BtnBookNow" Grid.Row="10" Grid.Column="5" Content="Book Now" Margin="10,0,10,0" Command="{Binding AddMeetingCommand}"/>

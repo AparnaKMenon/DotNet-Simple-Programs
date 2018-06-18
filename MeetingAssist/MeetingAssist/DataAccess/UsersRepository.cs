@@ -13,59 +13,12 @@ namespace MeetingAssist.DataAccess
 
         //Maintains the User collection locally
         static ObservableCollection<User> _users = new ObservableCollection<User>();
-
         
         /// Add a User        
         internal void Add(User user)
         {
             _users.Add(user);
         }
-
-
-        ///// Remove a user based on         
-        ///// User to remove</param>
-        //internal void Remove(User user)
-        //{
-        //    _users.Remove(user);
-        //}
-
-
-        ///// Search for the entry with User ID        
-        ///// <param name="id">User ID</param>
-        ///// <returns></returns>
-        //internal User Search(int id)
-        //{
-        //    //Get the users index in the collection
-        //    int index = GetIndex(id);
-        //    //If present then return the element
-        //    if (index > -1)
-        //        return _users[index];
-        //    return null;
-        //}
-
-
-        ///// Search for the User ID in the collection and return the Index        
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //private int GetIndex(int id)
-        //{
-        //    int index = -1;
-        //    //If Collection has Items
-        //    if (_users.Count > 0)
-        //    {
-        //        //Loop through the collection
-        //        for (int i = 0; i < _users.Count; i++)
-        //        {
-        //            //If match
-        //            if (_users[i].Id == id)
-        //            {
-        //                index = i;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return index;
-        //}
 
         private void RemoveAll()
         {

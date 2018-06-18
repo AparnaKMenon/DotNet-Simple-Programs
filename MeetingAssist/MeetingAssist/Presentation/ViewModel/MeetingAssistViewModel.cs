@@ -65,12 +65,13 @@ namespace MeetingAssist.Presentation.ViewModel
 
             _attendees = new ObservableCollection<User>();
 
-            //Populate All Comboboxes
+            //Populate all Combos, set all controls to default values
             PopulateMeetingRooms();
             PopulateStartTimeList();
             PopulateDuration();
             PopulateUsers();
             PopulateMeetings();
+            PopulateDefaultDescriptionAndAgenda();
         }
 
         #endregion
@@ -401,6 +402,12 @@ namespace MeetingAssist.Presentation.ViewModel
         private void CalculateMeetingTime()
         {
             _meetingManager.CalculateMeetingTime(StartDate, StartTime, Duration, out _meetingStartTime, out _meetingEndTime);
+        }
+
+        private void PopulateDefaultDescriptionAndAgenda()
+        {
+            _description = "Let's Meet For:";
+            _agenda = "Welcome\nApproval of Last meetings minutes\nStatus Update\nNew Business\nAnnouncements\nAction Items";
         }
 
         #endregion

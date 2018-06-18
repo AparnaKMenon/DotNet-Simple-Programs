@@ -13,64 +13,7 @@ namespace MeetingAssist.DataAccess
 
         //Maintains the Meeting collection locally
         static ObservableCollection<Meeting> _meetings = new ObservableCollection<Meeting>();
-        
-        ///// Remove a meeting        
-        ///// <param name="meeting">Meeting to remove</param>
-        //internal void Remove(Meeting meeting)
-        //{
-        //    _meetings.Remove(meeting);
-        //}
-        
-        ///// Search for the entry with Meeting ID        
-        ///// <param name="id">Meeting ID</param>
-        ///// <returns></returns>
-        //internal Meeting Search(int id)
-        //{
-        //    //Get the meetings index in the collection
-        //    int index = GetIndex(id);
-        //    //If present then return the element
-        //    if (index > -1)
-        //        return _meetings[index];
-        //    return null;
-        //}
-        
-        ///// Search for the Meeting ID in the collection and return the Index        
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //private int GetIndex(int id)
-        //{
-        //    int index = -1;
-        //    //If Collection has Items
-        //    if (_meetings.Count > 0)
-        //    {
-        //        //Loop through the collection
-        //        for (int i = 0; i < _meetings.Count; i++)
-        //        {
-        //            //If match
-        //            if (_meetings[i].MeetingId == id)
-        //            {
-        //                index = i;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return index;
-        //}
-
-        //private void RemoveAll()
-        //{
-        //    //If Collection has Items
-        //    if (_meetings.Count > 0)
-        //    {
-        //        //Loop through the collection
-        //        for (int i = 0; i < _meetings.Count; i++)
-        //        {
-        //            //If match
-        //            _meetings.RemoveAt(i);
-        //        }
-        //    }
-        //}
-
+   
         public ObservableCollection<Meeting> FetchRepository()
         {
             NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres; " +
