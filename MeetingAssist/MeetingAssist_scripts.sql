@@ -1,4 +1,4 @@
---table ddls
+--table ddls--
 
 CREATE TABLE "MEETING"
 (
