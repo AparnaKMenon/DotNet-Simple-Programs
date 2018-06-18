@@ -407,7 +407,7 @@ namespace MeetingAssist.Presentation.ViewModel
         private void PopulateDefaultDescriptionAndAgenda()
         {
             _description = "Let's Meet For:";
-            _agenda = "Welcome\nApproval of Last meetings minutes\nStatus Update\nNew Business\nAnnouncements\nAction Items";
+            _agenda = "Welcome\nApproval of Last meetings minutes\nStatus Update\nNew Business & Announcements\nAction Items";
         }
 
         #endregion

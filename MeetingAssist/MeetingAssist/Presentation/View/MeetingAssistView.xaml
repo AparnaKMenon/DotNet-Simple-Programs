@@ -10,16 +10,59 @@
         <ViewModels:MeetingAssistViewModel/>
     </UserControl.DataContext>
 
-    <Grid Name="GridMeetingAssistView" Background="#FF323232" >
+    <UserControl.Resources>
+        
+        <LinearGradientBrush x:Key="NormalBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF" Offset="0.0"/>
+            <GradientStop Color="#CCC" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="PressedBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#BBB" Offset="0.0"/>
+            <GradientStop Color="#EEE" Offset="0.1"/>
+            <GradientStop Color="#EEE" Offset="0.9"/>
+            <GradientStop Color="#FFF" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="NormalBorderBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#CCC" Offset="0.0"/>
+            <GradientStop Color="#444" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BorderBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#CCC" Offset="0.0"/>
+            <GradientStop Color="#444" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="PressedBorderBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#444" Offset="0.0"/>
+            <GradientStop Color="#888" Offset="1.0"/>
+        </LinearGradientBrush>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+        <Style x:Key="SimpleButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="Background" Value="{StaticResource NormalBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource NormalBorderBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="Grid">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" Value="{StaticResource PressedBrush}" TargetName="Border"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" TargetName="Border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+
+    <Grid Name="GridMeetingAssistView" Background="#FF323232" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
 
         <!--Header - Meeting Assist-->
@@ -33,43 +76,37 @@
             <StackPanel.Effect>
                 <DropShadowEffect/>
             </StackPanel.Effect>
+            <Grid VerticalAlignment="Stretch">
 
-            <Label Name="LblMtngAssist" Content="Meeting Assist" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="36" FontWeight="Medium" Foreground="White" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft YaHei UI">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-1"/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        </StackPanel>
+                <Label Name="LblMtngAssist" Grid.Column="0" Content="Meeting Assist" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="36" FontWeight="Medium" Foreground="White" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft YaHei UI">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-1"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
 
-        <!--Header - Current Date and Time-->
-        <StackPanel Name="StkpnlDateNTime"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,0" >
-            <StackPanel.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="Gray" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-            <StackPanel.Effect>
-                <DropShadowEffect/>
-            </StackPanel.Effect>
-            <Label Name="LblDateNTime" Content="{Binding Path=CurrentDateTime}"
-                   HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="40" FontWeight="Medium" Foreground="White" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft YaHei UI">
-                <Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform X="-1"/>
-                    </TransformGroup>
-                </Label.RenderTransform>
-            </Label>
-
+                <!--Header - Current Date and Time-->
+                <Label Name="LblDateNTime" Grid.Column="1" Content="{Binding Path=CurrentDateTime}"
+                   HorizontalAlignment="Right" VerticalAlignment="Stretch" FontSize="18" FontWeight="Medium" Foreground="White" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft YaHei UI">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-1"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+            </Grid>
         </StackPanel>
 
         <!--Controls for Booking a Meeting-->
@@ -93,10 +130,11 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -116,34 +154,44 @@
                 </TextBox>
 
                 <!--Date Time and Duration-->
-                <Label Name="LblStartTime" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Content="Start Time" Margin="10,0,0,0" Foreground="White"/>
-                <DatePicker Name="DtPkrStartDate" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" Foreground="#FF1E1E69" Background="#FF1A1111" 
+                <Label Name="LblStartTime" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Content="Start Time" Margin="10,10,0,0" Foreground="White"/>
+                <DatePicker Name="DtPkrStartDate" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,10,0,0" Foreground="#FF1E1E69" Background="#FF1A1111" 
                             SelectedDate="{Binding StartDate}"/>
-                <ComboBox Name="CmbStartTime" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" Margin="10,0,0,0"
+                <ComboBox Name="CmbStartTime" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" Margin="10,10,0,0"
                           ItemsSource="{Binding Path=StartTimeList}"
                           SelectedValue="{Binding StartTime}"
-                          IsSynchronizedWithCurrentItem="True"/>
-                <Label Name="LblDuration" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Right" Content="Duration" Margin="10,0,0,0" Foreground="White" />
-                <ComboBox Name="CmbDuration" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" Margin="10,0,10,0" 
+                          IsSynchronizedWithCurrentItem="True">
+                    <ComboBox.Effect>
+                        <DropShadowEffect/>
+                    </ComboBox.Effect>
+                </ComboBox>
+                <Label Name="LblDuration" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Right" Content="Duration" Margin="10,10,0,0" Foreground="White" />
+                <ComboBox Name="CmbDuration" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" Margin="10,10,10,0" 
                           ItemsSource="{Binding Path=DurationList}"
                           SelectedValue="{Binding Duration}"
-                          IsSynchronizedWithCurrentItem="True"/>
-
+                          IsSynchronizedWithCurrentItem="True">
+                    <ComboBox.Effect>
+                        <DropShadowEffect/>
+                    </ComboBox.Effect>
+                </ComboBox>
                 <!--Meeting Room Title, Combo-->
-                <Label Name="LblMtngRoom" Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Meeting Room" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
-                <ComboBox Name="CmbMtngRooms" Grid.Row="3" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Margin="10,0,10,10"
+                <Label Name="LblMtngRoom" Grid.Row="2" Grid.Column="0"  Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Content="Meeting Room" Margin="10,10,10,0" Foreground="White"/>
+                <ComboBox Name="CmbMtngRooms" Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="4" HorizontalAlignment="Stretch" Margin="10"
                           ItemsSource="{Binding Path=MeetingRooms}"
                           SelectedValue="{Binding SelectedMeetingRoom}"
                           DisplayMemberPath="Name"
-                          IsSynchronizedWithCurrentItem="True"/>
-
+                          IsSynchronizedWithCurrentItem="True">
+                    <ComboBox.Effect>
+                        <DropShadowEffect/>
+                    </ComboBox.Effect>
+                </ComboBox>
                 <!-- Organizer Name-->
-                <Label Name="LblOrganizer" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Content="Organizer" Margin="10,0,0,0" Foreground="White"/>
-                <Label Name="LblLoginName" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,0,0" Foreground="White" Content="{Binding Path=OrganizerLogin}"/>
+                <Label Name="LblOrganizer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Content="Organizer" Margin="10,0,0,0" Foreground="White"/>
+                <Label Name="LblLoginName" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,0" Foreground="White" Content="{Binding Path=OrganizerLogin}"/>
 
                 <!-- Add Attendees -->
-                <Label Name="LblAttendees" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" Content="Attendees" Margin="10,0,0,0" Foreground="White"/>
-                <ComboBox Name="CmbAddAttendees" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,10,10,0" 
+                <Label Name="LblAttendees" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" Content="Attendees" Margin="10,0,0,0" Foreground="White"/>
+                <ComboBox Name="CmbAddAttendees" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" 
                           ItemsSource="{Binding Path=Users}"
                           SelectedValue="{Binding SelectedUser}"
                           DisplayMemberPath="Name"
@@ -152,11 +200,11 @@
                         <DropShadowEffect/>
                     </ComboBox.Effect>
                 </ComboBox>
-                <Button Name="BtnAddAttendee" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" Content="Add" Margin="0,10,10,0" Command="{Binding AddAttendeeCommand}" />
+                <Button Name="BtnAddAttendee" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Stretch" Content="Add" Margin="0,10,10,0" Width="80" Height="26" Command="{Binding AddAttendeeCommand}" Style="{StaticResource SimpleButton}" />
 
                 <!-- List of Attendees -->
-                <Label Name="LblAttendeesLst" Grid.Row="6" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Attendees" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
-                <ListView Name="LstvwAttendees" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="5" Margin="10,0,10,0"
+                <Label Name="LblAttendeesLst" Grid.Row="5" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Attendees" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
+                <ListView Name="LstvwAttendees" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="5" Margin="10,0,10,0"
                           ItemsSource="{Binding Path = Attendees}" 
                           ScrollViewer.VerticalScrollBarVisibility="Visible" >
                     <ListView.View>
@@ -169,45 +217,14 @@
                 </ListView>
 
                 <!--Meeting Agenda-->
-                <Label Name="LblMtngAgenda" Grid.Row="8" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Meeting Agenda" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
-                <TextBox Name="TxtMtngAgenda" Grid.Row="9" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Margin="10,0,10,10" VerticalScrollBarVisibility="Visible" FontSize="12" Text="{Binding Path= Agenda }" />
+                <Label Name="LblMtngAgenda" Grid.Row="7" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="Meeting Agenda" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
+                <TextBox Name="TxtMtngAgenda" Grid.Row="8" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Margin="10,0,10,10" VerticalScrollBarVisibility="Visible" FontSize="12" Text="{Binding Path= Agenda }" />
 
                 <!-- Book Now Button -->
-                <Button Name="BtnBookNow" Grid.Row="10" Grid.Column="5" Content="Book Now" Margin="10,0,10,0" Command="{Binding AddMeetingCommand}"/>
-            </Grid>
-        </StackPanel>
+                <Button Name="BtnBookNow" Grid.Row="9" Grid.Column="5" Content="Book Now" Width="80" Height="26" Margin="0,0,10,0" Command="{Binding AddMeetingCommand}" Style="{StaticResource SimpleButton}"/>
 
-        <!--List of Booked Meetings-->
-        <StackPanel Name="StkpnlMeetingList" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" >
-            <StackPanel.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="Gray" Offset="1"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-            <StackPanel.Effect>
-                <DropShadowEffect/>
-            </StackPanel.Effect>
-
-            <!--My Meetings-->
-            <Grid VerticalAlignment="Stretch">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="4*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="3*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-
-                <Label Name="LblMyMtngs" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Content="My Meetings" Height="25" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
-                <ListView Name="LstvwMyMtngs" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="5" Margin="10,0,10,0"
+                <Label Name="LblMyMtngs" Grid.Row="10" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Content="My Meetings" Height="25" Margin="10,10,10,0" Foreground="White" Background="#FF355B7C"/>
+                <ListView Name="LstvwMyMtngs" Grid.Row="11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="5" Margin="10,0,10,0"
                           ItemsSource="{Binding Path = Meetings}">
                     <ListView.View>
                         <GridView>
@@ -220,6 +237,5 @@
                 </ListView>
             </Grid>
         </StackPanel>
-
     </Grid>
 </UserControl>
