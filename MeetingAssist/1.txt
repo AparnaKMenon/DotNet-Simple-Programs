@@ -1,0 +1,11 @@
+'Charles Babbage  , 'Charles.Babbage@Computer.com  , 'chbabb 
+'Claude Shannon  , 'Claude.Shannon@IT.com  , 'clshan 
+'Dennis Ritchie  , 'Dennis.Ritchie@C.com  , 'deritc 
+'Ken Thompson  , 'KenThompson@UNIX.com  , 'kethomp 
+'Brian Kernighan  , 'BrianKernighan@Unix.com  , 'brkernig 
+'Bjarne Stroustrup  , 'BjarneStroustrup@CPP.com  , 'bjstroust 
+'James Gosling  , 'JamesGosling@JAVA.com  , 'jagosl 
+'Richard Stallman  , 'RichardStallman@GNU.com  , 'ristall 
+'Steve Jobsfather   , 'SteveJobs@Apple.com  , 'stjobsfat 
+'Bill Gates  , 'BillGates@Microsoft.com  , 'biga 
+'Linus Torvalds  , 'LinusTorvalds@Linux.com  , 'litorva 

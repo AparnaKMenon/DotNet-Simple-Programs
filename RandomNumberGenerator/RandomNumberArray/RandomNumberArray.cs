@@ -35,19 +35,22 @@ public class RandomNumber
             finally
             {
                 Console.WriteLine("Enter 0 to quit, any other key to continue");
-                condition = (Console.ReadLine())[0];
+                string strCondition = Console.ReadLine();
+                if (!String.IsNullOrEmpty(strCondition))
+                {
+                    condition = (strCondition)[0];
+                }
             }
         }
     }
 
     public static void generateRandomNumArray(int firstNum, int lastNum)
     {
-
         List<int> lstNumbers = new List<int>();
 
-        for (int i = firstNum; i <= lastNum; i++)
+        for (int index = firstNum; index <= lastNum; index++)
         {
-            lstNumbers.Add(i);
+            lstNumbers.Add(index);
         }
 
         int nArrSize = lstNumbers.Count;
@@ -64,6 +67,9 @@ public class RandomNumber
             Console.Write(" " + lstRandNumbers[index] + " ");
 
     }
+
+    //Function to generate a Random Number from in between the range
+    //The uniqueness of "System.Guid" is used for generating Randomness
 
     public static int generateRandomNum(int low, int high)
     {
