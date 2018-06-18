@@ -1,0 +1,6 @@
+styles to wpf controls
+exception handling
+correct the combo
+close button
+templates
+ui for random number
