@@ -21,7 +21,6 @@ public class RandomNumber
             string strLow = Console.ReadLine();
             Console.WriteLine("Higher Value:");
             string strHigh = Console.ReadLine();
-
             try
             {
                 low = Convert.ToInt32(strLow);
@@ -65,12 +64,10 @@ public class RandomNumber
 
         for (int index = 0; index < nArrSize; index++)
             Console.Write(" " + lstRandNumbers[index] + " ");
-
     }
 
     //Function to generate a Random Number from in between the range
     //The uniqueness of "System.Guid" is used for generating Randomness
-
     public static int generateRandomNum(int low, int high)
     {
         int nRandom = low;
