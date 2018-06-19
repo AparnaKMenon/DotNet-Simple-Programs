@@ -48,6 +48,7 @@ namespace MeetingAssist.DataAccess
                 User user = new User((int)dr[0], (string)dr[1], (string)dr[2]);
                 Add(user);
             }
+            conn.Close();
             return _users;
         }
     }

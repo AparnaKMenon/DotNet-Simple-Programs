@@ -30,7 +30,7 @@ namespace MeetingAssist.DataAccess
                 MeetingRoom meetingRoom = new MeetingRoom((int)dr[0], (string)dr[1]);
                 meetingRooms.Add(meetingRoom);
             }
-
+            conn.Close();
             return meetingRooms;
         }
     }

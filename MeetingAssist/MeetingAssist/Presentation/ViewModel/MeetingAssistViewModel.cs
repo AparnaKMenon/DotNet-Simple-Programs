@@ -62,6 +62,7 @@ namespace MeetingAssist.Presentation.ViewModel
 
             _addAttendeeCommand = new RelayCommand(AddAttendee, CanAddAttendee);
             _addMeetingCommand = new RelayCommand(AddMeeting, CanAddMeeting);
+            _closeWindowCommand = new RelayCommand(CloseWindow, null);
 
             _attendees = new ObservableCollection<User>();
 
@@ -273,12 +274,16 @@ namespace MeetingAssist.Presentation.ViewModel
 
         private readonly ICommand _addAttendeeCommand;
         private readonly ICommand _addMeetingCommand;
+        private readonly ICommand _closeWindowCommand;
 
-        /// Gets the AddAttendeeCommand. Used for Add Attendee Button Operation
+        // Gets the AddAttendeeCommand. Used for Add Attendee Button Operation
         public ICommand AddAttendeeCommand { get { return _addAttendeeCommand; } }
 
-        /// Gets the AddMeetingCommand. Used for Book Meeting Button Operation
+        // Gets the AddMeetingCommand. Used for Book Meeting Button Operation
         public ICommand AddMeetingCommand { get { return _addMeetingCommand; } }
+
+        //Gets the CloseWindowCommand.
+        public ICommand CloseWindowCommand { get { return _closeWindowCommand; } }
 
         private void AddAttendee(object obj)
         {
@@ -328,6 +333,11 @@ namespace MeetingAssist.Presentation.ViewModel
             if (null != Description && (null != _startDate) && (null != _startTime) && (null != _duration))
                 return true;
             return false;
+        }
+
+        private void CloseWindow(object obj)
+        {
+            Environment.Exit(0);
         }
 
         #endregion
@@ -438,8 +448,6 @@ namespace MeetingAssist.Presentation.ViewModel
                 }
             }
         }
-
         #endregion
-
     }
 }
