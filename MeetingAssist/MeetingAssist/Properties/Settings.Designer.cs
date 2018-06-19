@@ -26,5 +26,7 @@ namespace MeetingAssist.Properties
                 return defaultInstance;
             }
         }
+
+
     }
 }

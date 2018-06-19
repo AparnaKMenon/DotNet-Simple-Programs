@@ -204,13 +204,11 @@ namespace MeetingAssist.Presentation.ViewModel
 
         public MeetingRoom SelectedMeetingRoom
         {
-            get { return _meetingRoom; }
             set
             {
                 _meetingRoom = value;
-                _roomId = _meetingRoom.Id;
-                _roomName = _meetingRoom.Name;
-                OnPropertyChanged("CmbMtngRooms");
+                _roomId = value.RoomId;
+                _roomName = value.RoomName;
             }
         }
 
@@ -313,6 +311,7 @@ namespace MeetingAssist.Presentation.ViewModel
                 Agenda = Agenda,
                 MeetingStartTime = MeetingStartTime,
                 MeetingEndTime = MeetingEndTime,
+                RoomId = RoomId,
                 RoomName = RoomName,
                 MeetingAttendees = _attendees,
                 OrganizerLogin = _organizerLogin
@@ -328,10 +327,18 @@ namespace MeetingAssist.Presentation.ViewModel
             }
         }
 
+        //The Button for Booking a Meeting will be enabled only if the meeting duration is > 0
+        //The Description field should not be empty, and the attendee count should be > 0 (Organizer is a )
         private bool CanAddMeeting(object obj)
         {
-            if (null != Description && (null != _startDate) && (null != _startTime) && (null != _duration))
+            if ((null != _description) && 
+                (null != _startDate) && 
+                (null != _startTime) && 
+                (null != _duration) &&
+                (_meetingStartTime != _meetingEndTime))
+            {
                 return true;
+            }
             return false;
         }
 
@@ -346,14 +353,28 @@ namespace MeetingAssist.Presentation.ViewModel
 
         private void PopulateMeetingRooms()
         {
-            _meetingRooms = new ObservableCollection<MeetingRoom>();
-            _meetingRooms = _meetingManager.FetchMeetingRoomList(_startDate, _startTime, _duration);
+            try
+            {
+                _meetingRooms = new ObservableCollection<MeetingRoom>();
+                _meetingRooms = _meetingManager.FetchMeetingRoomList(_startDate, _startTime, _duration);
+            }
+            catch(Exception e)
+            {
+                HandleExceptions(e);
+            }
         }
 
         private void PopulateMeetings()
         {
-            _meetings = new ObservableCollection<Meeting>();
-            _meetings = _meetingManager.FetchMeetingsList();
+            try
+            {
+                _meetings = new ObservableCollection<Meeting>();
+                _meetings = _meetingManager.FetchMeetingsList();
+            }
+            catch (Exception e)
+            {
+                HandleExceptions(e);
+            }
         }
 
         private void PopulateStartTimeList()
@@ -402,11 +423,18 @@ namespace MeetingAssist.Presentation.ViewModel
 
         private void PopulateUsers()
         {
-            _users = new ObservableCollection<User>();
-            _users = _meetingManager.FetchUserList();
+            try
+            {
+                _users = new ObservableCollection<User>();
+                _users = _meetingManager.FetchUserList();
 
-            //Update Login name of the Organizer (current user)
-            _organizerLogin = Environment.UserName;
+                //Update Login name of the Organizer (current user)
+                _organizerLogin = Environment.UserName;
+            }
+            catch(Exception e)
+            {
+                HandleExceptions(e);
+            }
         }
 
         private void CalculateMeetingTime()
@@ -416,8 +444,13 @@ namespace MeetingAssist.Presentation.ViewModel
 
         private void PopulateDefaultDescriptionAndAgenda()
         {
-            _description = "Let's Meet For:";
+            _description = "";
             _agenda = "Welcome\nApproval of Last meetings minutes\nStatus Update\nNew Business & Announcements\nAction Items";
+        }
+
+        private void HandleExceptions(Exception e)
+        {
+          //  MessageBox.Show("Exception : " + e.GetType().Name);
         }
 
         #endregion

@@ -11,6 +11,7 @@ namespace MeetingAssist.Presentation.Model
         private string _description;
         private string _meetingStartTime;
         private string _meetingEndTime;
+        private int _roomId;
         private string _roomName;
         private string _organizerLogin;
         private string _agenda;
@@ -49,6 +50,13 @@ namespace MeetingAssist.Presentation.Model
         }
 
         // Gets or Sets integer ID for the Meeting Room
+        public int RoomId
+        {
+            get { return _roomId; }
+            set { _roomId = value; }
+        }
+
+        // Gets or Sets the string name for the Meeting Room
         public string RoomName
         {
             get { return _roomName; }
@@ -84,8 +92,8 @@ namespace MeetingAssist.Presentation.Model
         {
         }
 
-        public Meeting(string description, string meetingStartTime,
-            string meetingEndTime, string roomName, string organizerLogin, string agenda)
+        public Meeting(string description, string meetingStartTime, string meetingEndTime, 
+            string roomName, string organizerLogin, string agenda)
         {
             _description = description;
             _meetingStartTime = meetingStartTime;
@@ -95,12 +103,13 @@ namespace MeetingAssist.Presentation.Model
             _agenda = agenda;
         }
 
-        public Meeting(string description, string meetingStartTime, 
-            string meetingEndTime, string roomName, string organizerLogin, string agenda, ObservableCollection <User> attendees)
+        public Meeting(string description, string meetingStartTime, string meetingEndTime, int roomId,
+            string roomName, string organizerLogin, string agenda, ObservableCollection <User> attendees)
         {
             _description = description;
             _meetingStartTime = meetingStartTime;
             _meetingEndTime = meetingEndTime;
+            _roomId = roomId;
             _roomName = roomName;
             _organizerLogin = organizerLogin;
             _agenda = agenda;

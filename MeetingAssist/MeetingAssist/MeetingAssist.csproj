@@ -38,6 +38,7 @@
       <HintPath>..\packages\Npgsql.4.0.0\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -79,6 +80,7 @@
     <Compile Include="BusinessLogic\RelayCommand.cs" />
     <Compile Include="BusinessLogic\MeetingManager.cs" />
     <Compile Include="DataAccess\AttendeesRepository.cs" />
+    <Compile Include="DataAccess\DBUtil.cs" />
     <Compile Include="DataAccess\MeetingsRepository.cs" />
     <Compile Include="DataAccess\RoomsRepository.cs" />
     <Compile Include="DataAccess\UsersRepository.cs" />

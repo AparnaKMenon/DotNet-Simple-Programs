@@ -11,14 +11,14 @@
         #region Properties
 
         // Gets or Sets Unique integer ID for the Meeting Room
-        public int Id
+        public int RoomId
         {
             get { return _id; }
             set { _id = value; }
         }
 
         // Gets or Sets Name of the Meeting Room
-        public string Name
+        public string RoomName
         {
             get { return _name; }
             set { _name = value; }

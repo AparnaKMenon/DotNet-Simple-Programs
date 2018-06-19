@@ -94,7 +94,7 @@ namespace MeetingAssist.BusinessLogic
             CalculateMeetingTime(startDate, startTime, duration, out meetingStart, out meetingEnd);
 
             ObservableCollection<MeetingRoom> meetingRooms = _roomsRepository.FetchRepository(meetingStart, meetingEnd);
-            return meetingRooms;
+            return meetingRooms;            
         }
 
         public ObservableCollection<Meeting> FetchMeetingsList()

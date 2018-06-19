@@ -12,7 +12,7 @@ namespace MeetingAssist.DataAccess
         }
 
         //Maintains the User collection locally
-        static ObservableCollection<User> _users = new ObservableCollection<User>();
+        static ObservableCollection<User> _users;
         
         /// Add a User        
         internal void Add(User user)
@@ -36,19 +36,30 @@ namespace MeetingAssist.DataAccess
 
         public ObservableCollection<User> FetchRepository()
         {
-            RemoveAll();
-            NpgsqlConnection conn = new NpgsqlConnection("Server=localhost;User Id=postgres; " +
-                "Password=postgres;Database=myoffice;");
-            conn.Open();
-            String sql = "SELECT \"USER_ID\",\"NAME\",\"MAILID\" FROM \"USER\"";
-            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
-            NpgsqlDataReader dr = command.ExecuteReader();
-            while (dr.Read())
+            NpgsqlConnection conn = null;
+            try
             {
-                User user = new User((int)dr[0], (string)dr[1], (string)dr[2]);
-                Add(user);
+                conn = DBUtil.GetDBConnection();
+                conn.Open();
+                String sql = "SELECT \"USER_ID\",\"NAME\",\"MAILID\" FROM \"USER\"";
+                NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+                _users = new ObservableCollection<User>();
+                while (dr.Read())
+                {
+                    User user = new User((int)dr[0], (string)dr[1], (string)dr[2]);
+                    Add(user);
+                }
             }
-            conn.Close();
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception in FetchRepository : " + e.ToString());
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
             return _users;
         }
     }

@@ -52,6 +52,5 @@ namespace MeetingAssist.BusinessLogic
         }
 
         #endregion
-
     }
 }
