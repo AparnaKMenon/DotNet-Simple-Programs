@@ -1,3 +1,11 @@
+
+--sequences
+CREATE SEQUENCE "MEETING_MEETING_ID_seq" START 1 increment 1;
+
+CREATE SEQUENCE "MEETING_ROOMS_ROOM_ID_seq" START 1 increment 1;
+
+CREATE SEQUENCE "USER_USER_ID_seq" START 1 increment 1;
+
 --table ddls--
 
 CREATE TABLE "MEETING"
