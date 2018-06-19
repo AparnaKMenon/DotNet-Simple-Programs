@@ -15,9 +15,10 @@ MeetingAssist
 MeetingAssist is a WPF Application using C# and SQL(PostGreSQL) for booking Meetings
 -Loads with a List of Meeting Rooms, Users.
 -For booking a Meeting, Organizer should:
-  ->add the Attendees, 
-  ->enter the date, time and duration for the meeting, 
-  ->select a meeting Room
-  ->Provide a Meeting Description and an Agenda.
+  (i)   add the Attendees, 
+  (ii)  enter the date, time and duration for the meeting, 
+  (iii) select a meeting Room
+  (iv)  Provide a Meeting Description and an Agenda
+-The list of Meetings booked by this particular Organizer will be listed
 
 
