@@ -108,7 +108,7 @@ public class RandomNumber
             String strHex = strGuid.Substring(strGuid.Length - numDigits, numDigits);
             uint uRandom = Convert.ToUInt32(strHex, 16);
 
-            //Handling the case where the random number obtained is greater that what Int32 can hold
+            //Handling the case where the random number obtained is greater than what Int32 can hold
             if (uRandom > Int32.MaxValue)
             {
                 nRandom = generateRandomNum(low, high);
