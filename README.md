@@ -1,4 +1,4 @@
-# DotNet
+# DotNet Trials
 DotNet Projects
 
 RandomNumberGenerator
